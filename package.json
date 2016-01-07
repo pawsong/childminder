@@ -8,7 +8,7 @@
     "prepublish": "tsd install && npm test",
     "start": "gulp test:watch",
     "test": "npm run clean && gulp test",
-    "clean": "rimraf lib .test",
+    "clean": "rimraf lib .test"
   },
   "author": "Giff Song <giff.song@gmail.com>",
   "license": "MIT",
