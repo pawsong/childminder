@@ -89,6 +89,7 @@ gulp.task('test:run', ['build:test'], function () {
   return gulp.src([
     '.test/**/*.js',
   ]).pipe(mocha({
+    timeout: 60 * 1000,
     reporter: 'spec',
     require: ['source-map-support/register'],
   }));
