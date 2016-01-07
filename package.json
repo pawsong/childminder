@@ -13,6 +13,22 @@
   },
   "author": "Giff Song <giff.song@gmail.com>",
   "license": "MIT",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pawsong/childminder.git"
+  },
+  "keywords": [
+    "nodemon",
+    "monitor",
+    "development",
+    "restart",
+    "reload",
+    "terminal"
+  ],
   "dependencies": {
     "byline": "^4.2.1",
     "cli-color": "^1.1.0",
