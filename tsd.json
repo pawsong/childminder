@@ -1,0 +1,36 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "mocha/mocha.d.ts": {
+      "commit": "0d66537e353802f996a3f67ca1b711f63835f9e7"
+    },
+    "node/node.d.ts": {
+      "commit": "6a6ad7068a177c0d7a8a20830626cb63277191c5"
+    },
+    "through2/through2.d.ts": {
+      "commit": "419793fb796b0e5c1ed11e018ad28475de0c3735"
+    },
+    "pty.js/pty.js.d.ts": {
+      "commit": "6a6ad7068a177c0d7a8a20830626cb63277191c5"
+    },
+    "byline/byline.d.ts": {
+      "commit": "6a6ad7068a177c0d7a8a20830626cb63277191c5"
+    },
+    "cli-color/cli-color.d.ts": {
+      "commit": "6a6ad7068a177c0d7a8a20830626cb63277191c5"
+    },
+    "sprintf-js/sprintf-js.d.ts": {
+      "commit": "6a6ad7068a177c0d7a8a20830626cb63277191c5"
+    },
+    "chai/chai.d.ts": {
+      "commit": "6a6ad7068a177c0d7a8a20830626cb63277191c5"
+    },
+    "assertion-error/assertion-error.d.ts": {
+      "commit": "6a6ad7068a177c0d7a8a20830626cb63277191c5"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "root": true,
+  "env": {
+    "node": true,
+  },
+  "rules": {
+    "func-names": 0
+  },
+  "extends": [
+    "airbnb/base"
+  ]
+}
