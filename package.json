@@ -5,10 +5,11 @@
   "main": "lib/childminder.js",
   "typings": "lib/childminder.d.ts",
   "scripts": {
-    "prepublish": "tsd install && npm test",
+    "prepublish": "tsd install",
     "start": "gulp test:watch",
     "test": "npm run clean && gulp test",
-    "clean": "rimraf lib .test"
+    "clean": "rimraf lib .test",
+    "deploy": "npm test && npm publish"
   },
   "author": "Giff Song <giff.song@gmail.com>",
   "license": "MIT",
