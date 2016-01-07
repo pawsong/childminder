@@ -2,6 +2,9 @@
 
 `childminder` is a simple process manager for development.
 
+[![NPM Version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+  
 ```typescript
 import { Childminder } from 'childminder';
 
@@ -59,6 +62,11 @@ Restart child process.
 ## License
 
 MIT
+
+[npm-image]: https://img.shields.io/npm/v/childminder.svg
+[npm-url]: https://npmjs.org/package/childminder
+[travis-image]: https://img.shields.io/travis/pawsong/childminder/master.svg
+[travis-url]: https://travis-ci.org/pawsong/childminder
 
 [nodemon]: https://github.com/remy/nodemon
 [Babel]: https://github.com/babel/babel
