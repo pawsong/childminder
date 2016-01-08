@@ -48,7 +48,7 @@ Create `Child` instance.
   - `prefix` *String* `stdout` message prefix
   - `prefixColor` *Number* Prefix xTerm colors
   - `stdout` *stream.Writable* Child's stdout stream (Default: `process.stdout`)
-  - `lazy` *Boolean* Whether or not to run immediately when created (Default: `false`)
+  - `lazy` *Boolean* If true, `Child` process does not start running when created (Default: `false`)
 - returns `Child` instance.
 
 
