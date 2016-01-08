@@ -31,6 +31,12 @@
     },
     "assertion-error/assertion-error.d.ts": {
       "commit": "6a6ad7068a177c0d7a8a20830626cb63277191c5"
+    },
+    "sinon/sinon.d.ts": {
+      "commit": "ba257a9b91bc0de1bdd9091b6723194c905a902a"
+    },
+    "object-assign/object-assign.d.ts": {
+      "commit": "ba257a9b91bc0de1bdd9091b6723194c905a902a"
     }
   }
 }

@@ -3,11 +3,13 @@ import * as pty from 'pty.js';
 import * as byline from 'byline';
 import { Terminal, TerminalOptions } from 'pty.js';
 import * as clc from 'cli-color';
+import objectAssign = require('object-assign');
 
 export interface ChildOptions extends TerminalOptions {
   prefix?: string;
   prefixColor?: number;
   stdout?: NodeJS.WritableStream;
+  lazy? : boolean;
 }
 
 export interface Prefix {
@@ -36,7 +38,10 @@ export class Child {
     this.cm = cm;
     this.command = command;
     this.args = args || [];
-    this.options = options || {};
+    this.options = objectAssign({
+      stdout: process.stdout,
+      lazy: false,
+    }, options || {});
     this.prefix = prefix;
 
     this.stdout = through(function (chunk, encoding, callback) {
@@ -48,8 +53,17 @@ export class Child {
       return callback();
     });
 
-    this.stdout.pipe(options.stdout || process.stdout);
+    this.stdout.pipe(options.stdout);
 
+    if (!options.lazy) {
+      this.startOrRestartProcess();
+    }
+  }
+
+  /**
+   * Start or restart child process.
+   */
+  startOrRestart() {
     this.startOrRestartProcess();
   }
 
@@ -57,7 +71,17 @@ export class Child {
    * Restart child process.
    */
   restart() {
+    if (!this.isRunning()) {
+      console.warn('[Childminder] Process is not running.');
+    }
     this.startOrRestartProcess();
+  }
+
+  /**
+   * Returns if the child process is running.
+   */
+  isRunning() {
+    return !!this.terminal;
   }
 
   private kill() {

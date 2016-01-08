@@ -4,7 +4,7 @@
 
 [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
-  
+
 ```typescript
 import { Childminder } from 'childminder';
 
@@ -47,7 +47,8 @@ Create `Child` instance.
   - `env` *Object* Environment key-value pairs
   - `prefix` *String* `stdout` message prefix
   - `prefixColor` *Number* Prefix xTerm colors
-  - `stdout` *stream.Writable* Child's stdout stream
+  - `stdout` *stream.Writable* Child's stdout stream (Default: `process.stdout`)
+  - `lazy` *Boolean* Whether or not to run immediately when created (Default: `false`)
 - returns `Child` instance.
 
 
@@ -55,9 +56,17 @@ Create `Child` instance.
 
 Thin wrapper of node.js ChildProcess object, which supports restart. `Child` instance is created by `Childminder#create` method.
 
+`Child#startOrRestart()`
+
+Start or restart child process.
+
 `Child#restart()`
 
-Restart child process.
+Restart running child process.
+
+`Child#isRunning()`
+
+Returns if the child process is running.
 
 ## License
 

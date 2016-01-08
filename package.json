@@ -32,6 +32,7 @@
   "dependencies": {
     "byline": "^4.2.1",
     "cli-color": "^1.1.0",
+    "object-assign": "^4.0.1",
     "pty.js": "^0.3.0",
     "through2": "^2.0.0"
   },
@@ -53,6 +54,7 @@
     "memorystream": "^0.3.1",
     "rimraf": "^2.5.0",
     "run-sequence": "^1.1.5",
+    "sinon": "^1.17.2",
     "source-map-support": "^0.4.0",
     "tsd": "^0.6.5",
     "tslint": "^3.2.1",
