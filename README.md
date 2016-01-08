@@ -26,7 +26,7 @@ child.restart();
 ## Motivation
 
 [nodemon][nodemon] is a useful tool in node.js server
-programming. It watches file changes and restarts node.js process automatically. However, if we use transpilers like [Babel][Babel], [CoffeeScript][coffeeScript] or [TypeScript][TypeScript], the appropriate time to reload node process is not when file is changed but when transpilation is completed. Maybe in this case, we should monitor events from transpiler and reload process manually.
+programming. It watches file changes and restarts node.js process automatically. If we use transpilers like [Babel][Babel], [CoffeeScript][coffeeScript] or [TypeScript][TypeScript], however, process should not restart when file changes but when transpilation is completed. Maybe in this case, we should monitor events from transpiler and reload process manually.
 
 `childminder` is yet another tool for development like [nodemon][nodemon], but does not watch file changes. When using `childminder`, you should call `childminder` process restart function manually, which looks cumbersome but indeed is a clear way.
 
