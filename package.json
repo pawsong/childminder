@@ -1,6 +1,6 @@
 {
   "name": "childminder",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Simple process manager for development",
   "main": "lib/childminder.js",
   "typings": "lib/childminder.d.ts",

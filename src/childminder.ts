@@ -31,7 +31,7 @@ export class Child {
   private cm: Childminder;
   private command: string;
   private args: string[];
-  private options: TerminalOptions;
+  private options: ChildOptions;
   private stdout: NodeJS.ReadWriteStream;
 
   constructor(cm: Childminder, prefix: Prefix, command: string, args?: string[], options?: ChildOptions) {
@@ -53,7 +53,7 @@ export class Child {
       return callback();
     });
 
-    this.stdout.pipe(options.stdout);
+    this.stdout.pipe(this.options.stdout);
 
     if (!options.lazy) {
       this.startOrRestartProcess();
