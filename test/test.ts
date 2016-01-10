@@ -16,7 +16,7 @@ describe('Childminder', () => {
         stdout: stream,
       });
 
-      await new Promise(resolve => child.terminal.on('exit', resolve));
+      await child.waitForExit();
       expect(stream.toString()).to.equal('hello\n');
     });
 
@@ -29,7 +29,7 @@ describe('Childminder', () => {
         prefixColor: 120,
       });
 
-      await new Promise(resolve => child.terminal.on('exit', resolve));
+      await child.waitForExit();
       expect(stream.toString()).to.equal(
         `${clc.xterm(120)('[blabla]')} hello\n`
       );
@@ -51,8 +51,8 @@ describe('Childminder', () => {
       });
 
       await Promise.all([
-        new Promise(resolve => child1.terminal.on('exit', resolve)),
-        new Promise(resolve => child2.terminal.on('exit', resolve)),
+        await child1.waitForExit(),
+        await child2.waitForExit(),
       ]);
       expect(stream1.toString()).to.equal(
         `${clc.xterm(120)('[blabla]')}    hello\n`
@@ -93,7 +93,7 @@ describe('Child', () => {
       (console.warn as Sinon.SinonStub).restore();
     });
 
-    it('should not emit any warning message when called on stopped process', () => {
+    it('should not emit any warning message when called on stopped process', async () => {
       const cm = new Childminder();
       const stream = new Memorystream(null, { readable: false });
       const child = cm.create('echo', ['hello'], {
@@ -102,7 +102,7 @@ describe('Child', () => {
       });
 
       expect(child.isRunning()).to.equal(false);
-      child.startOrRestart();
+      await child.startOrRestart();
       expect(child.isRunning()).to.equal(true);
       expect((console.warn as Sinon.SinonStub).called).to.equal(false);
     });
@@ -114,14 +114,16 @@ describe('Child', () => {
       const child = cm.create('echo', ['hello'], {
         stdout: stream,
       });
-      await new Promise(resolve => child.terminal.on('exit', resolve));
+      await child.waitForExit();
+      expect(stream.toString()).to.equal('hello\n');
 
       // Restart two times.
-      child.startOrRestart();
-      await new Promise(resolve => child.terminal.on('exit', resolve));
+      await child.startOrRestart();
+      await child.waitForExit();
+      expect(stream.toString()).to.equal('hello\nhello\n');
 
-      child.startOrRestart();
-      await new Promise(resolve => child.terminal.on('exit', resolve));
+      await child.startOrRestart();
+      await child.waitForExit();
 
       expect(stream.toString()).to.equal('hello\nhello\nhello\n');
     });
@@ -136,16 +138,15 @@ describe('Child', () => {
       (console.warn as Sinon.SinonStub).restore();
     });
 
-    it('should emit warning message when process is not running', () => {
+    it('should emit warning message when process is not running', async () => {
       const cm = new Childminder();
       const stream = new Memorystream(null, { readable: false });
       const child = cm.create('echo', ['hello'], {
         stdout: stream,
         lazy: true,
       });
-
       expect(child.isRunning()).to.equal(false);
-      child.restart();
+      await child.restart();
       expect(child.isRunning()).to.equal(true);
       expect(
         (console.warn as Sinon.SinonStub).calledWith('[Childminder] Process is not running.')
@@ -159,14 +160,16 @@ describe('Child', () => {
       const child = cm.create('echo', ['hello'], {
         stdout: stream,
       });
-      await new Promise(resolve => child.terminal.on('exit', resolve));
+      await child.waitForExit();
+      expect(stream.toString()).to.equal('hello\n');
 
       // Restart two times.
-      child.restart();
-      await new Promise(resolve => child.terminal.on('exit', resolve));
+      await child.restart();
+      await child.waitForExit();
+      expect(stream.toString()).to.equal('hello\nhello\n');
 
-      child.restart();
-      await new Promise(resolve => child.terminal.on('exit', resolve));
+      await child.restart();
+      await child.waitForExit();
 
       expect(stream.toString()).to.equal('hello\nhello\nhello\n');
     });
