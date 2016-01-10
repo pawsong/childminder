@@ -5,7 +5,7 @@
   "main": "lib/childminder.js",
   "typings": "lib/childminder.d.ts",
   "scripts": {
-    "prepublish": "tsd install",
+    "prepublish": "tsd install && gulp build",
     "start": "gulp test:watch",
     "test": "npm run clean && gulp test",
     "clean": "rimraf lib .test",
