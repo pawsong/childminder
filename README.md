@@ -1,6 +1,6 @@
 # childminder
 
-`childminder` is a simple process manager for development.
+`childminder` is a promise based child process manager for development.
 
 [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
@@ -36,7 +36,7 @@ programming. It watches file changes and restarts node.js process automatically.
 
 Process manager that contains multiple Child instances.
 
-`Childminder#create(command[, args][, options])`
+`Childminder#create(command[, args][, options]) => Child`
 
 Create `Child` instance.
 
@@ -56,15 +56,19 @@ Create `Child` instance.
 
 Thin wrapper of node.js ChildProcess object, which supports restart. `Child` instance is created by `Childminder#create` method.
 
-`Child#startOrRestart()`
+`Child#startOrRestart() => Promise<void>`
 
-Start or restart child process.
+Starts or restarts child process. Returned promise is resolved when the previous process exits and new process gets started.
 
-`Child#restart()`
+`Child#restart() => Promise<void>`
 
-Restart running child process.
+Restarts running child process. Returned promise is resolved when the previous process exits and new process gets started.
 
-`Child#isRunning()`
+`Child#waitForExit() => Promise<void>`
+
+Wait for child process to terminate. Returned promise is resolved when the process exits.
+
+`Child#isRunning() => boolean`
 
 Returns if the child process is running.
 

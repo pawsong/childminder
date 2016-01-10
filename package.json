@@ -1,7 +1,7 @@
 {
   "name": "childminder",
   "version": "0.2.1",
-  "description": "Simple process manager for development",
+  "description": "Promise based child process manager for development",
   "main": "lib/childminder.js",
   "typings": "lib/childminder.d.ts",
   "scripts": {
@@ -27,9 +27,13 @@
     "development",
     "restart",
     "reload",
-    "terminal"
+    "terminal",
+    "process",
+    "promise",
+    "bluebird"
   ],
   "dependencies": {
+    "bluebird": "^3.1.1",
     "byline": "^4.2.1",
     "cli-color": "^1.1.0",
     "object-assign": "^4.0.1",

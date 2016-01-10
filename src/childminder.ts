@@ -4,6 +4,7 @@ import * as byline from 'byline';
 import { Terminal, TerminalOptions } from 'pty.js';
 import * as clc from 'cli-color';
 import objectAssign = require('object-assign');
+import * as Promise from 'bluebird';
 
 export interface ChildOptions extends TerminalOptions {
   prefix?: string;
@@ -56,45 +57,60 @@ export class Child {
     this.stdout.pipe(this.options.stdout);
 
     if (!options.lazy) {
-      this.startOrRestartProcess();
+      this.startProcess();
     }
   }
 
   /**
    * Start or restart child process.
    */
-  startOrRestart() {
-    this.startOrRestartProcess();
+  startOrRestart(): Promise<void> {
+    return this.startOrRestartProcess();
   }
 
   /**
    * Restart child process.
    */
-  restart() {
+  restart(): Promise<void> {
     if (!this.isRunning()) {
       console.warn('[Childminder] Process is not running.');
     }
-    this.startOrRestartProcess();
+    return this.startOrRestartProcess();
   }
 
   /**
    * Returns if the child process is running.
    */
-  isRunning() {
+  isRunning(): boolean {
     return !!this.terminal;
   }
 
-  private kill() {
-    if (this.terminal) {
-      this.terminal.kill();
-      this.terminal = null;
+  waitForExit(): Promise<void> {
+    if (!this.terminal) {
+      return Promise.resolve();
     }
+    return new Promise<void>(resolve => {
+      this.terminal.on('exit', () => resolve());
+    });
   }
 
-  private startOrRestartProcess() {
-    this.kill();
+  private kill(): Promise<void> {
+    if (this.terminal) {
+      this.terminal.kill();
+    }
+    return this.waitForExit();
+  }
+
+  private startProcess() {
     this.terminal = pty.spawn(this.command, this.args, this.options);
+    this.terminal.on('exit', () => {
+      this.terminal = null;
+    });
     byline.createStream(this.terminal.stdout as any).pipe(this.stdout, { end: false });
+  }
+
+  private startOrRestartProcess(): Promise<void> {
+    return this.kill().then(() => this.startProcess());
   }
 }
 
