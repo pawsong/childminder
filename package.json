@@ -1,6 +1,6 @@
 {
   "name": "childminder",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "Promise based child process manager for development",
   "main": "lib/childminder.js",
   "typings": "lib/childminder.d.ts",
