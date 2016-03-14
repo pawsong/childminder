@@ -10,7 +10,7 @@ export interface ChildOptions extends TerminalOptions {
   prefix?: string;
   prefixColor?: number;
   stdout?: NodeJS.WritableStream;
-  lazy? : boolean;
+  lazy?: boolean;
 }
 
 export interface Prefix {
