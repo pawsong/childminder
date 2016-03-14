@@ -4,6 +4,7 @@ import * as clc from 'cli-color';
 import * as sinon from 'sinon';
 
 const { expect } = chai;
+const isRunning = require('is-running');
 
 import { Childminder } from '..';
 
@@ -84,6 +85,22 @@ describe('Childminder', () => {
 });
 
 describe('Child', () => {
+  describe('#kill', () => {
+    it('should kill child process', async () => {
+      const cm = new Childminder();
+      const stream = new Memorystream(null, { readable: false });
+      const child = cm.create('echo', ['hello'], {
+        stdout: stream,
+      });
+
+      const { pid } = child.terminal;
+      expect(isRunning(pid)).to.equal(true);
+
+      await child.kill();
+      expect(isRunning(pid)).to.equal(false);
+    });
+  });
+
   describe('#startOrRestart', () => {
     beforeEach(() => {
       console.warn = sinon.stub(console, 'warn');

@@ -94,7 +94,7 @@ export class Child {
     });
   }
 
-  private kill(): Promise<void> {
+  kill(): Promise<void> {
     if (this.terminal) {
       this.terminal.kill();
     }
