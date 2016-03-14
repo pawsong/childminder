@@ -1,6 +1,6 @@
 {
   "name": "childminder",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Promise based child process manager for development",
   "main": "lib/childminder.js",
   "typings": "lib/childminder.d.ts",
@@ -55,6 +55,7 @@
     "gulp-tslint": "^4.2.2",
     "gulp-typescript": "^2.10.0",
     "gulp-util": "^3.0.7",
+    "is-running": "^2.0.0",
     "memorystream": "^0.3.1",
     "rimraf": "^2.5.0",
     "run-sequence": "^1.1.5",

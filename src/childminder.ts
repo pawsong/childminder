@@ -10,7 +10,7 @@ export interface ChildOptions extends TerminalOptions {
   prefix?: string;
   prefixColor?: number;
   stdout?: NodeJS.WritableStream;
-  lazy? : boolean;
+  lazy?: boolean;
 }
 
 export interface Prefix {
@@ -94,7 +94,7 @@ export class Child {
     });
   }
 
-  private kill(): Promise<void> {
+  kill(): Promise<void> {
     if (this.terminal) {
       this.terminal.kill();
     }
