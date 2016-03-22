@@ -89,7 +89,7 @@ describe('Child', () => {
     it('should kill child process', async () => {
       const cm = new Childminder();
       const stream = new Memorystream(null, { readable: false });
-      const child = cm.create('echo', ['hello'], {
+      const child = cm.create('node', ['-e', 'setTimeout(null, 10 * 1000)'], {
         stdout: stream,
       });
 

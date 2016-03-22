@@ -94,9 +94,9 @@ export class Child {
     });
   }
 
-  kill(): Promise<void> {
+  kill(signal = 'SIGHUP'): Promise<void> {
     if (this.terminal) {
-      this.terminal.kill();
+      this.terminal.kill(signal);
     }
     return this.waitForExit();
   }
