@@ -72,7 +72,7 @@ Wait for child process to terminate. Returned promise is resolved when the proce
 
 Returns if the child process is running.
 
-`Child#kill() => Promise<void>`
+`Child#kill(signal = 'SIGHUP') => Promise<void>`
 
 Kill child process and wait for it to terminate. Returned promise is resolved when the process exits.
 
