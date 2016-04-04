@@ -35,14 +35,16 @@ export class Child {
   private options: ChildOptions;
   private stdout: NodeJS.ReadWriteStream;
 
-  constructor(cm: Childminder, prefix: Prefix, command: string, args?: string[], options?: ChildOptions) {
+  constructor(cm: Childminder, prefix: Prefix, command: string, args?: string[], options: ChildOptions = {}) {
     this.cm = cm;
     this.command = command;
     this.args = args || [];
     this.options = objectAssign({
       stdout: process.stdout,
       lazy: false,
-    }, options || {});
+    }, options, {
+      env: objectAssign({}, process.env, options.env),
+    });
     this.prefix = prefix;
 
     this.stdout = through(function (chunk, encoding, callback) {

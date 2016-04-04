@@ -63,23 +63,38 @@ describe('Childminder', () => {
       );
     });
 
-    it('should immediately start running when instance is created without lazy option', () => {
-      const cm = new Childminder();
-      const stream = new Memorystream(null, { readable: false });
-      const child = cm.create('echo', ['hello'], {
-        stdout: stream,
+    describe('options.lazy', () => {
+      it('should immediately start running when instance is created without lazy option', () => {
+        const cm = new Childminder();
+        const stream = new Memorystream(null, { readable: false });
+        const child = cm.create('echo', ['hello'], {
+          stdout: stream,
+        });
+        expect(child.isRunning()).to.equal(true);
       });
-      expect(child.isRunning()).to.equal(true);
+
+      it('should not start running when instance is created with lazy option', () => {
+        const cm = new Childminder();
+        const stream = new Memorystream(null, { readable: false });
+        const child = cm.create('echo', ['hello'], {
+          stdout: stream,
+          lazy: true,
+        });
+        expect(child.isRunning()).to.equal(false);
+      });
     });
 
-    it('should not start running when instance is created with lazy option', () => {
-      const cm = new Childminder();
-      const stream = new Memorystream(null, { readable: false });
-      const child = cm.create('echo', ['hello'], {
-        stdout: stream,
-        lazy: true,
+    describe('options.env', () => {
+      it('should set environment variables', async () => {
+        const cm = new Childminder();
+        const stream = new Memorystream(null, { readable: false });
+        const child = cm.create('node', ['-e', 'console.log(process.env.GREETING)'], {
+          stdout: stream,
+          env: { GREETING: 'Hi, there!' },
+        });
+        await child.waitForExit();
+        expect(stream.toString()).to.equal('Hi, there!\n');
       });
-      expect(child.isRunning()).to.equal(false);
     });
   });
 });
